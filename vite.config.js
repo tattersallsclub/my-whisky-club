@@ -8,5 +8,5 @@ import react from '@vitejs/plugin-react'
 // project before, hardcoding it removes that failure mode entirely.
 export default defineConfig({
   plugins: [react()],
-  base: '/whisky-club-app/',
+  base: '/my-whisky-club/',
 })
