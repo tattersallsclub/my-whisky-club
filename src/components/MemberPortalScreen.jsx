@@ -10,6 +10,7 @@ import { APPS_SCRIPT_WEB_APP_URL, WHISKEY_LIST_PDF_URL } from '../config'
 import { MultiRangeSelect } from './MultiRangeSelect'
 import { Spinner } from './Spinner'
 import { useAsyncAction } from '../hooks/useAsyncAction'
+import crest from '../assets/crest-white.png'
 
 // "None" exists so staff can re-add someone removed by mistake without a
 // charge, that only ever makes sense as a choice staff make deliberately
@@ -111,8 +112,12 @@ export function MemberPortalScreen() {
   })
 
   return (
-    <div className="portal-screen">
+    <>
+    <header className="portal-brand">
+      <img src={crest} alt="Tattersalls Club crest" />
       <h1>My Whisky Club</h1>
+    </header>
+    <div className="portal-screen">
 
       {!member && (
         <form onSubmit={(e) => { e.preventDefault(); runLookup() }} className="portal-lookup-form">
@@ -155,6 +160,7 @@ export function MemberPortalScreen() {
         View the full whiskey list (PDF)
       </a>
     </div>
+    </>
   )
 }
 

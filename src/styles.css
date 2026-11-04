@@ -1,26 +1,23 @@
 /*
-  Palette is built from the club's own two brand colours, a deep navy
-  and a muted gold, with white for every bit of text. Variable names
-  stay the same as before (oak, amber) even though the colours no
-  longer look like wood or whisky, changing every usage site across the
-  file to match new names would be a much larger, riskier edit for zero
-  practical benefit, only the values themselves needed to change.
+  Brand theme. Light page, navy header and buttons, gold for anything
+  selected. Fonts are loaded by link tags in index.html. Headings use
+  Cormorant Garamond, everything else uses Nunito Sans.
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;500;700&display=swap');
-
 :root {
-  --oak-950: #001f38;
-  --oak-900: #003359;
-  --oak-800: #0d4870;
-  --oak-700: #205c86;
-  --amber-500: #b2a06b;
-  --amber-400: #c2b280;
-  --amber-300: #d4c89a;
-  --parchment: #ffffff;
-  --success: #5f9a6a;
-  --danger: #c15a3d;
+  --navy: #0b2f4e;
+  --navy-soft: #e8eef4;
+  --gold: #b6a268;
+  --gold-soft: #f4efdf;
+  --line: #a6bcd2;
+  --white: #ffffff;
+  --green: #087f5b;
+  --success: #087f5b;
+  --danger: #b4452a;
+  --danger-soft: #fbe9e5;
   --radius: 10px;
+  --font-heading: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Nunito Sans', system-ui, sans-serif;
 }
 
 * {
@@ -29,14 +26,21 @@
 
 body {
   margin: 0;
-  background: var(--oak-950);
-  color: var(--parchment);
-  font-family: 'Roboto Slab', 'Georgia', serif;
+  background: var(--white);
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-weight: 600;
   -webkit-tap-highlight-color: transparent;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-heading);
+  font-weight: 600;
 }
 
 button, input, select {
   font-family: inherit;
+  font-weight: inherit;
 }
 
 .btn {
@@ -48,20 +52,20 @@ button, input, select {
   min-height: 44px;
 }
 
-.btn-primary {
-  background: var(--amber-500);
-  color: var(--oak-950);
-  font-weight: 700;
+.btn-primary,
+.btn-secondary {
+  background: var(--navy);
+  color: var(--white);
 }
 
-.btn-secondary {
-  background: var(--oak-700);
-  color: var(--parchment);
+.btn-export {
+  background: var(--green);
+  color: var(--white);
 }
 
 .btn-danger {
   background: var(--danger);
-  color: var(--parchment);
+  color: var(--white);
 }
 
 .btn-small {
@@ -76,6 +80,11 @@ button, input, select {
   padding: 16px;
 }
 
+.btn:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
 /* Pin gate */
 
 .pin-gate {
@@ -83,7 +92,8 @@ button, input, select {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 30%, var(--oak-800), var(--oak-950));
+  background: var(--navy);
+  color: var(--white);
 }
 
 .pin-form {
@@ -95,14 +105,14 @@ button, input, select {
 }
 
 .pin-form h1 {
-  color: var(--amber-400);
-  letter-spacing: 0.05em;
+  color: var(--white);
+  letter-spacing: 0.03em;
 }
 
 .pin-form input {
-  background: var(--oak-800);
-  border: 1px solid var(--oak-700);
-  color: var(--parchment);
+  background: var(--white);
+  border: 1px solid var(--line);
+  color: var(--navy);
   border-radius: var(--radius);
   padding: 14px;
   font-size: 1.5rem;
@@ -110,36 +120,61 @@ button, input, select {
   letter-spacing: 0.3em;
 }
 
+.pin-form .btn-primary {
+  background: var(--gold);
+  color: var(--navy);
+}
+
 .pin-error {
-  color: var(--danger);
+  color: #f6b9a8;
 }
 
 /* App shell */
 
 .app-shell {
-  max-width: 760px;
-  margin: 0 auto;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
 .app-header {
+  background: var(--navy);
+  color: var(--white);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  padding: 18px 20px 10px;
+  gap: 8px;
+  padding: 28px 20px 24px;
+}
+
+.app-crest {
+  height: 84px;
+  width: auto;
 }
 
 .app-header h1 {
-  color: var(--amber-400);
   margin: 0;
-  font-size: 1.4rem;
+  color: var(--white);
+  font-size: 2.4rem;
+  line-height: 1.1;
 }
 
-.app-header-actions {
+.app-body {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  flex: 1;
   display: flex;
-  gap: 8px;
+  flex-direction: column;
+}
+
+.app-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 16px 20px;
 }
 
 .banner {
@@ -150,48 +185,49 @@ button, input, select {
 }
 
 .banner-warning {
-  background: #4a3a2c;
-  color: var(--amber-300);
+  background: var(--gold-soft);
+  color: var(--navy);
+  border: 1px solid var(--gold);
 }
 
 .banner-error {
-  background: #4a2320;
-  color: #f0b3a5;
+  background: var(--danger-soft);
+  color: #8f2f17;
+  border: 1px solid var(--danger);
 }
 
 .app-tabs {
   display: flex;
-  gap: 4px;
   padding: 0 20px;
-  border-bottom: 1px solid var(--oak-700);
+  border-bottom: 1px solid var(--line);
 }
 
 .app-tab {
   flex: 1;
   background: none;
   border: none;
-  color: var(--parchment);
-  opacity: 0.6;
+  color: var(--navy);
   padding: 12px 0;
   font-size: 1rem;
   cursor: pointer;
-  border-bottom: 3px solid transparent;
+  border-bottom: 4px solid transparent;
+  margin-bottom: -1px;
 }
 
 .app-tab-active {
-  opacity: 1;
-  color: var(--amber-400);
-  border-bottom-color: var(--amber-500);
+  color: var(--gold);
+  border-bottom-color: var(--gold);
 }
 
 .app-content {
   padding: 20px;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .loading-indicator {
   text-align: center;
-  color: var(--amber-300);
   padding: 40px 0;
 }
 
@@ -202,9 +238,14 @@ button, input, select {
   padding: 16px;
   font-size: 1.1rem;
   border-radius: var(--radius);
-  border: 1px solid var(--oak-700);
-  background: var(--oak-800);
-  color: var(--parchment);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--navy);
+}
+
+input:focus, select:focus {
+  outline: 2px solid var(--gold);
+  outline-offset: 1px;
 }
 
 .no-results {
@@ -235,8 +276,7 @@ button, input, select {
 }
 
 .home-section h2 {
-  color: var(--amber-400);
-  font-size: 1.05rem;
+  font-size: 1.5rem;
   margin: 0 0 10px;
 }
 
@@ -249,26 +289,24 @@ button, input, select {
 .home-result-btn {
   width: 100%;
   text-align: left;
-  background: var(--oak-800);
-  color: var(--parchment);
+  background: var(--white);
+  color: var(--navy);
   border: none;
-  border-bottom: 1px solid var(--oak-700);
+  border-bottom: 1px solid var(--line);
   padding: 14px;
   font-size: 1rem;
   cursor: pointer;
 }
 
 .inactive-tag, .range-tag {
-  opacity: 0.6;
+  opacity: 0.7;
   font-size: 0.85rem;
   margin-left: 6px;
 }
 
 .needs-code-tag {
-  color: var(--amber-300);
-  opacity: 0.85;
   font-size: 0.8rem;
-  border: 1px solid var(--oak-700);
+  border: 1px solid var(--line);
   border-radius: 999px;
   padding: 1px 8px;
   margin-left: 4px;
@@ -284,12 +322,12 @@ button, input, select {
 }
 
 .member-detail-header h2 {
-  color: var(--amber-400);
   margin: 0;
+  font-size: 1.8rem;
 }
 
 .member-code {
-  opacity: 0.7;
+  opacity: 0.75;
   margin: 4px 0 0;
 }
 
@@ -311,15 +349,14 @@ button, input, select {
   flex-direction: column;
   gap: 4px;
   font-size: 0.9rem;
-  opacity: 0.9;
 }
 
 .edit-member-form input {
   padding: 10px;
   border-radius: var(--radius);
-  border: 1px solid var(--oak-700);
-  background: var(--oak-800);
-  color: var(--parchment);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--navy);
 }
 
 .sort-control {
@@ -327,16 +364,15 @@ button, input, select {
   align-items: center;
   gap: 8px;
   font-size: 0.9rem;
-  opacity: 0.85;
   margin-bottom: 14px;
 }
 
 .sort-control select {
   padding: 6px 10px;
   border-radius: var(--radius);
-  border: 1px solid var(--oak-700);
-  background: var(--oak-800);
-  color: var(--parchment);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--navy);
 }
 
 .all-clear {
@@ -347,19 +383,19 @@ button, input, select {
 /* Membership cards */
 
 .membership-card {
-  background: var(--oak-800);
+  background: var(--white);
   border-radius: var(--radius);
   padding: 16px;
   margin-bottom: 16px;
-  border: 1px solid var(--oak-700);
+  border: 1px solid var(--line);
 }
 
 .membership-card-complete {
-  background: var(--oak-900);
+  background: var(--navy-soft);
 }
 
 .membership-card-complete .slot-checkbox {
-  opacity: 0.55;
+  opacity: 0.6;
 }
 
 .membership-card-header {
@@ -373,7 +409,6 @@ button, input, select {
 .membership-member-name {
   display: block;
   font-weight: 700;
-  color: var(--parchment);
 }
 
 .membership-member-link {
@@ -381,24 +416,25 @@ button, input, select {
   border: none;
   padding: 0;
   cursor: pointer;
+  color: var(--navy);
   text-decoration: underline;
-  text-decoration-color: var(--oak-700);
+  text-decoration-color: var(--line);
 }
 
 .membership-member-link:hover {
-  color: var(--amber-400);
+  text-decoration-color: var(--gold);
 }
 
 .range-label {
-  color: var(--amber-400);
+  font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 1.02rem;
+  font-size: 1.3rem;
   margin-right: 10px;
 }
 
 .activation-date {
   font-size: 0.85rem;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 .membership-badges {
@@ -418,13 +454,12 @@ button, input, select {
 
 .consumed-count {
   font-size: 0.85rem;
-  opacity: 0.7;
+  opacity: 0.75;
   margin-left: 8px;
 }
 
 .collapse-caret {
   font-size: 1.2rem;
-  color: var(--amber-400);
   width: 20px;
   text-align: center;
 }
@@ -442,7 +477,7 @@ button, input, select {
   gap: 10px;
   margin-top: 10px;
   padding: 12px;
-  background: var(--oak-900);
+  background: var(--navy-soft);
   border-radius: var(--radius);
   max-width: 260px;
 }
@@ -452,15 +487,14 @@ button, input, select {
   flex-direction: column;
   gap: 4px;
   font-size: 0.85rem;
-  opacity: 0.9;
 }
 
 .renew-form select {
   padding: 8px;
   border-radius: var(--radius);
-  border: 1px solid var(--oak-700);
-  background: var(--oak-800);
-  color: var(--parchment);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--navy);
 }
 
 .badge {
@@ -471,17 +505,18 @@ button, input, select {
 }
 
 .badge-expired {
-  background: #4a2320;
-  color: #f0b3a5;
+  background: var(--danger-soft);
+  color: #8f2f17;
 }
 
 .badge-complete {
-  background: var(--oak-700);
-  color: var(--amber-300);
+  background: var(--navy);
+  color: var(--white);
 }
 
 .badge-locked {
-  background: var(--oak-700);
+  background: var(--navy-soft);
+  color: var(--navy);
 }
 
 .slot-grid {
@@ -495,7 +530,8 @@ button, input, select {
   display: flex;
   align-items: center;
   gap: 8px;
-  background: var(--oak-900);
+  background: var(--white);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 10px;
   cursor: pointer;
@@ -509,16 +545,16 @@ button, input, select {
 .slot-checkbox input {
   width: 22px;
   height: 22px;
-  accent-color: var(--amber-500);
+  accent-color: var(--navy);
 }
 
 .slot-checked {
-  background: #2e3d29;
+  background: var(--gold-soft);
+  border-color: var(--gold);
 }
 
 .slot-number {
   font-weight: 700;
-  color: var(--amber-400);
   min-width: 24px;
 }
 
@@ -530,8 +566,8 @@ button, input, select {
 /* Admin screens */
 
 .admin-screen h2 {
-  color: var(--amber-400);
   margin-top: 0;
+  font-size: 1.8rem;
 }
 
 .admin-screen-header {
@@ -541,7 +577,7 @@ button, input, select {
 }
 
 .admin-hint {
-  opacity: 0.75;
+  opacity: 0.8;
   font-size: 0.9rem;
 }
 
@@ -550,7 +586,10 @@ button, input, select {
   align-items: center;
   gap: 8px;
   margin: 10px 0;
-  opacity: 0.85;
+}
+
+.toggle-inactive input {
+  accent-color: var(--navy);
 }
 
 .member-admin-list {
@@ -563,7 +602,7 @@ button, input, select {
   align-items: center;
   gap: 10px;
   padding: 12px;
-  border-bottom: 1px solid var(--oak-700);
+  border-bottom: 1px solid var(--line);
 }
 
 .member-name-link {
@@ -571,14 +610,14 @@ button, input, select {
   text-align: left;
   background: none;
   border: none;
-  color: var(--parchment);
+  color: var(--navy);
   font-size: 1rem;
   cursor: pointer;
   padding: 0;
 }
 
 .member-inactive {
-  opacity: 0.5;
+  opacity: 0.55;
 }
 
 /* Whiskeys screen */
@@ -601,8 +640,7 @@ button, input, select {
 }
 
 .whiskey-range-group h3 {
-  color: var(--amber-300);
-  font-size: 0.95rem;
+  font-size: 1.3rem;
   margin: 0;
 }
 
@@ -616,7 +654,7 @@ button, input, select {
   align-items: center;
   gap: 10px;
   padding: 10px;
-  border-bottom: 1px solid var(--oak-700);
+  border-bottom: 1px solid var(--line);
 }
 
 .whiskey-admin-list li .slot-name {
@@ -627,14 +665,14 @@ button, input, select {
   flex: 1;
   padding: 8px;
   border-radius: var(--radius);
-  border: 1px solid var(--oak-700);
-  background: var(--oak-900);
-  color: var(--parchment);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--navy);
 }
 
 .slot-number-badge {
-  background: var(--oak-700);
-  color: var(--amber-400);
+  background: var(--navy);
+  color: var(--white);
   border-radius: 999px;
   min-width: 32px;
   text-align: center;
@@ -646,12 +684,12 @@ button, input, select {
 
 .range-tabs {
   display: flex;
-  gap: 6px;
+  gap: 8px;
   overflow-x: auto;
   padding-bottom: 10px;
   margin-bottom: 16px;
   scrollbar-width: thin;
-  scrollbar-color: var(--oak-700) transparent;
+  scrollbar-color: var(--line) transparent;
 }
 
 .range-tabs::-webkit-scrollbar {
@@ -663,15 +701,15 @@ button, input, select {
 }
 
 .range-tabs::-webkit-scrollbar-thumb {
-  background: var(--oak-700);
+  background: var(--line);
   border-radius: 999px;
 }
 
 .range-tab {
   flex: none;
-  background: var(--oak-800);
-  border: 1px solid var(--oak-700);
-  color: var(--parchment);
+  background: var(--navy);
+  border: 1px solid var(--navy);
+  color: var(--white);
   border-radius: 999px;
   padding: 8px 16px;
   cursor: pointer;
@@ -682,9 +720,9 @@ button, input, select {
 }
 
 .range-tab-active {
-  background: var(--amber-500);
-  color: var(--oak-950);
-  border-color: var(--amber-500);
+  background: var(--gold);
+  color: var(--navy);
+  border-color: var(--gold);
   font-weight: 700;
 }
 
@@ -692,11 +730,15 @@ button, input, select {
   display: inline-flex;
   align-items: center;
   gap: 3px;
-  background: var(--oak-700);
-  color: var(--amber-300);
+  background: rgba(255, 255, 255, 0.18);
+  color: inherit;
   border-radius: 999px;
   font-size: 0.75rem;
   padding: 1px 8px 1px 6px;
+}
+
+.range-tab-active .range-tab-count {
+  background: rgba(11, 47, 78, 0.15);
 }
 
 .avatar-icon {
@@ -714,8 +756,8 @@ button, input, select {
 }
 
 .range-detail-header h2 {
-  color: var(--amber-400);
   margin: 0;
+  font-size: 1.8rem;
 }
 
 /* Add member form */
@@ -732,26 +774,25 @@ button, input, select {
   flex-direction: column;
   gap: 6px;
   font-size: 0.9rem;
-  opacity: 0.9;
 }
 
 .add-member-form-vertical input,
 .add-member-form-vertical select {
   padding: 12px;
   border-radius: var(--radius);
-  border: 1px solid var(--oak-700);
-  background: var(--oak-800);
-  color: var(--parchment);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--navy);
   font-size: 1rem;
 }
 
 .match-hint {
-  color: var(--amber-300);
   font-size: 0.85rem;
+  opacity: 0.85;
 }
 
 .form-error {
-  color: #f0b3a5;
+  color: var(--danger);
 }
 
 .form-actions {
@@ -766,7 +807,7 @@ button, input, select {
 .dialog-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(11, 47, 78, 0.55);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -775,8 +816,8 @@ button, input, select {
 }
 
 .dialog-box {
-  background: var(--oak-800);
-  border: 1px solid var(--oak-700);
+  background: var(--white);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 24px;
   max-width: 380px;
@@ -785,7 +826,6 @@ button, input, select {
 
 .dialog-box h2 {
   margin-top: 0;
-  color: var(--amber-400);
 }
 
 .dialog-actions {
@@ -807,16 +847,9 @@ button, input, select {
 .portal-screen {
   max-width: 480px;
   margin: 0 auto;
-  min-height: 100vh;
   padding: 24px 20px;
   display: flex;
   flex-direction: column;
-}
-
-.portal-screen h1 {
-  color: var(--amber-400);
-  text-align: center;
-  margin-bottom: 20px;
 }
 
 .portal-lookup-form {
@@ -842,13 +875,12 @@ button, input, select {
 }
 
 .portal-member-header h2 {
-  color: var(--amber-400);
   margin: 0;
 }
 
 .portal-range-card {
-  background: var(--oak-800);
-  border: 1px solid var(--oak-700);
+  background: var(--white);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 16px;
   margin-bottom: 16px;
@@ -871,38 +903,59 @@ button, input, select {
 
 .portal-slot-status {
   font-size: 0.75rem;
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 .portal-request-form {
   margin-top: 20px;
   padding: 16px;
-  background: var(--oak-800);
+  background: var(--navy-soft);
   border-radius: var(--radius);
 }
 
 .portal-request-form h3 {
-  color: var(--amber-400);
   margin-top: 0;
+  font-size: 1.4rem;
 }
 
 .portal-disclaimer {
   font-size: 0.85rem;
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 .portal-pdf-link {
   display: block;
   text-align: center;
   margin-top: 24px;
-  color: var(--amber-400);
+  color: var(--navy);
   font-size: 0.9rem;
 }
 
 .portal-price-line {
   font-size: 0.95rem;
-  color: var(--amber-300);
-  font-weight: 600;
+  font-weight: 700;
+}
+
+/* Portal header band, same brand block as the staff app */
+
+.portal-brand {
+  background: var(--navy);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 28px 20px 24px;
+}
+
+.portal-brand img {
+  height: 84px;
+  width: auto;
+}
+
+.portal-brand h1 {
+  margin: 0;
+  color: var(--white);
+  font-size: 2.4rem;
 }
 
 /* Loading spinner, used inside buttons while a request is in flight */
@@ -924,11 +977,6 @@ button, input, select {
   }
 }
 
-.btn:disabled {
-  opacity: 0.7;
-  cursor: default;
-}
-
 /* Multi range select, looks like a plain closed dropdown, opens into a
    checkbox list so more than one range can be chosen in one submission */
 
@@ -943,15 +991,14 @@ button, input, select {
   align-items: center;
   padding: 12px;
   border-radius: var(--radius);
-  border: 1px solid var(--oak-700);
-  background: var(--oak-800);
-  color: var(--parchment);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--navy);
   font-size: 1rem;
   cursor: pointer;
 }
 
 .multi-range-caret {
-  color: var(--amber-400);
   font-size: 0.75rem;
   margin-left: 8px;
 }
@@ -961,10 +1008,10 @@ button, input, select {
   z-index: 9999;
   max-height: 240px;
   overflow-y: auto;
-  background: var(--oak-800);
-  border: 1px solid var(--oak-700);
+  background: var(--white);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 8px 20px rgba(11, 47, 78, 0.2);
 }
 
 .multi-range-row {
@@ -974,7 +1021,7 @@ button, input, select {
   gap: 10px;
   margin: 0;
   padding: 10px 14px;
-  border-bottom: 1px solid var(--oak-700);
+  border-bottom: 1px solid var(--line);
   cursor: pointer;
   font-size: 0.95rem;
 }
@@ -984,7 +1031,25 @@ button, input, select {
 }
 
 .multi-range-row-checked {
-  background: var(--oak-700);
+  background: var(--gold-soft);
+}
+
+.multi-range-row:last-child {
+  border-bottom: none;
+}
+
+.multi-range-row input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--navy);
+}
+
+.multi-range-empty {
+  grid-column: 1 / -1;
+  opacity: 0.7;
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 8px 0;
 }
 
 /* Member autocomplete, same dropdown language as the range picker */
@@ -997,16 +1062,16 @@ button, input, select {
   width: 100%;
   padding: 12px;
   border-radius: var(--radius);
-  border: 1px solid var(--oak-700);
-  background: var(--oak-800);
-  color: var(--parchment);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--navy);
   font-size: 1rem;
 }
 
 .member-autocomplete input:focus {
   outline: none;
-  border-color: #5b9bd5;
-  box-shadow: 0 0 0 2px rgba(91, 155, 213, 0.35);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(182, 162, 104, 0.45);
 }
 
 .member-autocomplete-dropdown {
@@ -1014,10 +1079,10 @@ button, input, select {
   z-index: 9999;
   max-height: 240px;
   overflow-y: auto;
-  background: var(--oak-800);
-  border: 1px solid var(--oak-700);
+  background: var(--white);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 8px 20px rgba(11, 47, 78, 0.2);
 }
 
 .member-autocomplete-row {
@@ -1027,9 +1092,9 @@ button, input, select {
   align-items: center;
   padding: 10px 14px;
   border: none;
-  border-bottom: 1px solid var(--oak-700);
+  border-bottom: 1px solid var(--line);
   background: none;
-  color: var(--parchment);
+  color: var(--navy);
   cursor: pointer;
   font-size: 0.95rem;
   text-align: left;
@@ -1040,11 +1105,11 @@ button, input, select {
 }
 
 .member-autocomplete-row:hover {
-  background: var(--oak-700);
+  background: var(--gold-soft);
 }
 
 .member-autocomplete-code {
-  opacity: 0.7;
+  opacity: 0.75;
   font-size: 0.85rem;
 }
 
@@ -1052,43 +1117,24 @@ button, input, select {
   display: inline-block;
   padding: 10px 16px;
   border-radius: var(--radius);
-  background: var(--oak-700);
-  color: var(--amber-300);
-  font-weight: 600;
+  background: var(--gold);
+  color: var(--navy);
+  font-weight: 700;
   width: fit-content;
-}
-
-.multi-range-row:last-child {
-  border-bottom: none;
-}
-
-.multi-range-row input {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--amber-500);
-}
-
-.multi-range-empty {
-  grid-column: 1 / -1;
-  opacity: 0.7;
-  font-size: 0.85rem;
-  text-align: center;
-  padding: 8px 0;
 }
 
 /* Notifications */
 
 .notification-bell {
   position: relative;
-  background: var(--oak-700);
-  color: var(--parchment);
+  background: var(--navy);
+  color: var(--white);
   border: none;
   border-radius: 999px;
   width: 44px;
   height: 44px;
   min-height: 44px;
   cursor: pointer;
-  font-size: 1.1rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1104,7 +1150,7 @@ button, input, select {
   top: -4px;
   right: -4px;
   background: var(--danger);
-  color: var(--parchment);
+  color: var(--white);
   border-radius: 999px;
   font-size: 0.7rem;
   min-width: 18px;
@@ -1116,8 +1162,8 @@ button, input, select {
 }
 
 .notification-card {
-  background: var(--oak-800);
-  border: 1px solid var(--oak-700);
+  background: var(--white);
+  border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 16px;
   margin-bottom: 14px;
@@ -1133,13 +1179,12 @@ button, input, select {
 
 .notification-card-header h3 {
   margin: 0;
-  color: var(--amber-400);
-  font-size: 1.05rem;
+  font-size: 1.4rem;
 }
 
 .notification-type-tag {
-  background: var(--oak-700);
-  color: var(--amber-300);
+  background: var(--navy-soft);
+  color: var(--navy);
   border-radius: 999px;
   padding: 2px 10px;
   font-size: 0.75rem;
@@ -1148,14 +1193,11 @@ button, input, select {
 
 .notification-detail {
   font-size: 0.9rem;
-  opacity: 0.85;
   margin: 2px 0;
 }
 
 .notification-price {
-  color: var(--amber-300);
-  font-weight: 600;
-  opacity: 1;
+  font-weight: 700;
 }
 
 .notification-actions {
@@ -1176,9 +1218,9 @@ button, input, select {
   padding: 10px;
   margin-top: 4px;
   border-radius: var(--radius);
-  border: 1px solid var(--oak-700);
-  background: var(--oak-900);
-  color: var(--parchment);
+  border: 1px solid var(--line);
+  background: var(--white);
+  color: var(--navy);
 }
 
 .home-section-last {
@@ -1193,7 +1235,7 @@ button, input, select {
   top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
+  z-index: 10000;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -1206,8 +1248,9 @@ button, input, select {
   gap: 10px;
   padding: 12px 14px;
   border-radius: var(--radius);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-  color: var(--parchment);
+  box-shadow: 0 8px 20px rgba(11, 47, 78, 0.25);
+  color: var(--navy);
+  background: var(--white);
 }
 
 .toast-message {
@@ -1216,24 +1259,29 @@ button, input, select {
 }
 
 .toast-success {
-  background: #2e4a30;
+  background: #e3f4ed;
   border: 1px solid var(--success);
 }
 
 .toast-error {
-  background: #4a2320;
+  background: var(--danger-soft);
   border: 1px solid var(--danger);
 }
 
 .toast-syncing {
-  background: var(--oak-800);
-  border: 1px solid var(--oak-700);
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.toast-syncing .spinner {
+  border-color: var(--line);
+  border-top-color: var(--navy);
 }
 
 .toast-dismiss {
   background: none;
   border: none;
-  color: var(--parchment);
+  color: var(--navy);
   font-size: 1.2rem;
   line-height: 1;
   cursor: pointer;
